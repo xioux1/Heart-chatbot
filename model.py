@@ -7,9 +7,7 @@ from langchain.vectorstores import FAISS
 from langchain.llms import CTransformers
 from langchain.chains import ConversationalRetrievalChain
 
-def add_vertical_space(spaces=1):
-    for _ in range(spaces):
-        st.sidebar.markdown("---")
+from utils import add_vertical_space, ensure_directory
 
 def main():
     st.set_page_config(page_title="Llama-2-GGML CSV Chatbot")
@@ -30,8 +28,7 @@ def main():
     DB_FAISS_PATH = "vectorstore/db_faiss"
     TEMP_DIR = "temp"
 
-    if not os.path.exists(TEMP_DIR):
-        os.makedirs(TEMP_DIR)
+    ensure_directory(TEMP_DIR)
 
     uploaded_file = st.sidebar.file_uploader("Upload CSV file", type=['csv'])
 
