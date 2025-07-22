@@ -1,0 +1,7 @@
+# dependencias
+node_modules/
+# variables de entorno
+.env
+# archivos de sistema mac/Win
+.DS_Store
+Thumbs.db
