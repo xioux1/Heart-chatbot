@@ -5,3 +5,4 @@ sentence-transformers==2.2.2
 faiss-cpu==1.7.4
 transformers==4.51.3
 pandas==2.1.4
+ctransformers>=0.2
