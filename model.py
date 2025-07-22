@@ -10,18 +10,18 @@ from langchain.chains import ConversationalRetrievalChain
 from utils import add_vertical_space, ensure_directory
 
 def main():
-    st.set_page_config(page_title="Llama-2-GGML CSV Chatbot")
-    st.title("Llama-2-GGML CSV Chatbot")
+    st.set_page_config(page_title="Phi-3 Mini CSV Chatbot")
+    st.title("Phi-3 Mini CSV Chatbot")
 
     st.sidebar.title("About")
     st.sidebar.markdown('''
-        The Llama-2-GGML CSV Chatbot uses the **Llama-2-7B-Chat-GGML** model.
+        The Phi-3 Mini CSV Chatbot uses the **Phi-3 Mini 3.8B** model.
         
         ### 🔄Bot evolving, stay tuned!
         
         ## Useful Links 🔗
         
-        - **Model:** [Llama-2-7B-Chat-GGML](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGML/tree/main) 📚
+        - **Model:** [Phi-3 Mini 3.8B](https://huggingface.co/microsoft/Phi-3-mini-4k-instruct-GGUF) 📚
         - **GitHub:** [ThisIs-Developer/Llama-2-GGML-CSV-Chatbot](https://github.com/ThisIs-Developer/Llama-2-GGML-CSV-Chatbot) 💬
     ''')
 
@@ -55,8 +55,8 @@ def main():
         docsearch = FAISS.from_documents(text_chunks, embeddings)
         docsearch.save_local(DB_FAISS_PATH)
 
-        llm = CTransformers(model="models/llama-2-7b-chat.ggmlv3.q4_0.bin",
-                            model_type="llama",
+        llm = CTransformers(model="models/phi-3-mini-4k-instruct-q4_0.gguf",
+                            model_type="phi3",
                             max_new_tokens=512,
                             temperature=0.1)
 
