@@ -13,11 +13,9 @@ import pytest
 def test_main_missing_model(monkeypatch, tmp_path):
     # Prepare dummy Streamlit
     calls = {"error": []}
-    dummy_file = types.SimpleNamespace(name="file.csv", getvalue=lambda: b"a,b\n1,2")
     dummy_sidebar = types.SimpleNamespace(
         title=lambda x: None,
         markdown=lambda x: None,
-        file_uploader=lambda label, type=None: dummy_file,
         write=lambda x: None,
     )
     dummy_st = types.SimpleNamespace(
@@ -116,14 +114,11 @@ def test_main_missing_model(monkeypatch, tmp_path):
 
     model.main()
 
-    # File written from upload
-    written = tmp_path / "temp" / "file.csv"
-    assert written.exists()
-    assert written.read_bytes() == b"a,b\n1,2"
+    expected_dataset = Path(model.__file__).resolve().parent / "data" / "heart.csv"
 
-    # Loader invoked with written file
-    assert DummyLoader.called == str(Path("temp") / "file.csv")
+    # Loader invoked with dataset file
+    assert DummyLoader.called == str(expected_dataset)
 
     # Error displayed when model missing
     assert calls["error"], "Expected error message when model file is missing"
-    assert "Model file not found" in calls["error"][0]
+    assert "no se encontró" in calls["error"][0]

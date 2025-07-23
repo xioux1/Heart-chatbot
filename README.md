@@ -1,6 +1,6 @@
 # Chatbot con Streamlit y Llama-2 70B Chat
 
-Este proyecto es un ejemplo de chatbot que combina **Streamlit** con el modelo **Llama-2 70B Chat** para responder preguntas basadas en los datos de un archivo CSV. El usuario puede subir su propio conjunto de datos y obtener respuestas contextualizadas.
+Este proyecto es un ejemplo de chatbot que combina **Streamlit** con el modelo **Llama-2 70B Chat** para responder preguntas basadas en los datos de un archivo CSV. Para simplificar la demostración se incluye un conjunto de datos de ejemplo (``heart.csv``) que se carga automáticamente y no existe la opción de subir archivos personalizados.
 
 ## Requisitos de instalación
 
@@ -36,9 +36,9 @@ Inicie la aplicación con:
 streamlit run model.py
 ```
 
-Aparecerá una interfaz web donde podrá cargar un archivo CSV desde la barra lateral. Tras la carga, el sistema generará un índice con FAISS y podrá escribir preguntas en el cuadro de texto para obtener respuestas basadas en la información del CSV.
+Aparecerá una interfaz web que utiliza automáticamente el archivo ``heart.csv`` incluido en el repositorio. El sistema genera un índice con FAISS y podrá escribir preguntas en el cuadro de texto para obtener respuestas basadas en la información del CSV.
 
-El índice se crea únicamente para la sesión actual y no se guarda en disco. Si reinicia la aplicación o carga un nuevo CSV, se generará un índice temporal nuevo.
+El índice se crea únicamente para la sesión actual y no se guarda en disco. Si reinicia la aplicación, se generará nuevamente a partir del dataset predefinido.
 
 ## Créditos y enlaces útiles
 
