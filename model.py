@@ -55,7 +55,18 @@ def main():
         docsearch = FAISS.from_documents(text_chunks, embeddings)
         docsearch.save_local(DB_FAISS_PATH)
 
-        llm = CTransformers(model="models/phi-3-mini-4k-instruct-q4_0.gguf",
+        model_path = os.path.join(os.path.dirname(__file__),
+                                  "models",
+                                  "phi-3-mini-4k-instruct-q4_0.gguf")
+
+        if not os.path.isfile(model_path):
+            st.error(
+                f"Model file not found at {model_path}. Please download it as"
+                " described in the README."
+            )
+            return
+
+        llm = CTransformers(model=model_path,
                             model_type="phi3",
                             max_new_tokens=512,
                             temperature=0.1)
