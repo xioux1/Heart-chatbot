@@ -1,7 +1,15 @@
 import streamlit as st
 import os
 from langchain_community.document_loaders.csv_loader import CSVLoader
-from langchain_community.text_splitter import RecursiveCharacterTextSplitter
+try:
+    # Preferred import for newer langchain versions
+    from langchain.text_splitters import RecursiveCharacterTextSplitter
+except ModuleNotFoundError:  # pragma: no cover - depends on installed packages
+    try:
+        # Fallback for older environments using langchain_community
+        from langchain_community.text_splitters import RecursiveCharacterTextSplitter
+    except ModuleNotFoundError:  # pragma: no cover - final fallback
+        from langchain_community.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_community.llms import CTransformers
