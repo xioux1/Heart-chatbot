@@ -4,7 +4,9 @@ Este proyecto es un ejemplo de chatbot que combina **Streamlit** con el modelo *
 
 ## Requisitos de instalación
 
-Se recomienda usar un entorno virtual de Python. Instale las dependencias ejecutando:
+Se recomienda usar un entorno virtual de **Python 3.10 o 3.11** (las versiones más nuevas,
+como Python 3.13, no son compatibles actualmente con `ctransformers`).
+Instale las dependencias ejecutando:
 
 ```bash
 pip install -r requirements.txt
