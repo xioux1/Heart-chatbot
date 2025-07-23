@@ -11,18 +11,18 @@ from langchain.chains import ConversationalRetrievalChain
 from utils import add_vertical_space, ensure_directory, get_model_path
 
 def main():
-    st.set_page_config(page_title="Phi-3 Mini CSV Chatbot")
-    st.title("Phi-3 Mini CSV Chatbot")
+    st.set_page_config(page_title="Llama-2 70B Chat CSV Chatbot")
+    st.title("Llama-2 70B Chat CSV Chatbot")
 
     st.sidebar.title("About")
     st.sidebar.markdown('''
-        The Phi-3 Mini CSV Chatbot uses the **Phi-3 Mini 3.8B** model.
+        The Llama-2 70B Chat CSV Chatbot uses the **Llama-2 70B Chat** model.
         
         ### 🔄Bot evolving, stay tuned!
         
         ## Useful Links 🔗
         
-        - **Model:** [Phi-3 Mini 3.8B](https://huggingface.co/microsoft/Phi-3-mini-4k-instruct-GGUF) 📚
+        - **Model:** [Llama-2 70B Chat](https://huggingface.co/TheBloke/Llama-2-70B-Chat-GGUF) 📚
         - **GitHub:** [ThisIs-Developer/Llama-2-GGML-CSV-Chatbot](https://github.com/ThisIs-Developer/Llama-2-GGML-CSV-Chatbot) 💬
     ''')
 
@@ -54,7 +54,7 @@ def main():
         embeddings = HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
         docsearch = FAISS.from_documents(text_chunks, embeddings)
 
-        model_path = get_model_path("Phi-3-mini-4k-instruct-q4.gguf")
+        model_path = get_model_path("llama-2-70b-chat.Q4_K_M.gguf")
 
         if not os.path.isfile(model_path):
             st.error(

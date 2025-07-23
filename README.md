@@ -1,6 +1,6 @@
-# Chatbot con Streamlit y Phi-3 Mini
+# Chatbot con Streamlit y Llama-2 70B Chat
 
-Este proyecto es un ejemplo de chatbot que combina **Streamlit** con el modelo **Phi-3 Mini 3.8B** para responder preguntas basadas en los datos de un archivo CSV. El usuario puede subir su propio conjunto de datos y obtener respuestas contextualizadas.
+Este proyecto es un ejemplo de chatbot que combina **Streamlit** con el modelo **Llama-2 70B Chat** para responder preguntas basadas en los datos de un archivo CSV. El usuario puede subir su propio conjunto de datos y obtener respuestas contextualizadas.
 
 ## Requisitos de instalación
 
@@ -12,7 +12,7 @@ Instale las dependencias ejecutando:
 pip install -r requirements.txt
 ```
 
-Además, es necesario descargar el modelo `Phi-3-mini-4k-instruct-q4.gguf` y colocarlo en la carpeta `models` (consulte `models/Phi-3-mini-4k-instruct-q4.gguf.md` para más detalles).
+Además, es necesario descargar el modelo `llama-2-70b-chat.Q4_K_M.gguf` y colocarlo en la carpeta `models` (consulte `models/llama-2-70b-chat.Q4_K_M.gguf.md` para más detalles).
 
 ### Descarga desde la línea de comandos
 
@@ -21,8 +21,8 @@ Puede utilizar la utilidad `huggingface-cli` para descargar directamente el arch
 ```bash
 pip install huggingface-hub>=0.17.1
 huggingface-cli login
-huggingface-cli download microsoft/Phi-3-mini-4k-instruct-gguf \
-    Phi-3-mini-4k-instruct-q4.gguf \
+huggingface-cli download TheBloke/Llama-2-70B-Chat-GGUF \
+    llama-2-70b-chat.Q4_K_M.gguf \
     --local-dir ./models --local-dir-use-symlinks False
 ```
 
@@ -42,5 +42,5 @@ El índice se crea únicamente para la sesión actual y no se guarda en disco. S
 
 ## Créditos y enlaces útiles
 
-- [Modelo Phi-3 Mini 3.8B](https://huggingface.co/microsoft/Phi-3-mini-4k-instruct-GGUF)
+- [Modelo Llama-2 70B Chat](https://huggingface.co/TheBloke/Llama-2-70B-Chat-GGUF)
 - Inspirado en el repositorio [ThisIs-Developer/Llama-2-GGML-CSV-Chatbot](https://github.com/ThisIs-Developer/Llama-2-GGML-CSV-Chatbot)
