@@ -25,7 +25,6 @@ def main():
         - **GitHub:** [ThisIs-Developer/Llama-2-GGML-CSV-Chatbot](https://github.com/ThisIs-Developer/Llama-2-GGML-CSV-Chatbot) 💬
     ''')
 
-    DB_FAISS_PATH = "vectorstore/db_faiss"
     TEMP_DIR = "temp"
 
     ensure_directory(TEMP_DIR)
@@ -53,7 +52,6 @@ def main():
 
         embeddings = HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
         docsearch = FAISS.from_documents(text_chunks, embeddings)
-        docsearch.save_local(DB_FAISS_PATH)
 
         model_path = get_model_path("Phi-3-mini-4k-instruct-q4.gguf")
 

@@ -38,6 +38,8 @@ streamlit run model.py
 
 Aparecerá una interfaz web donde podrá cargar un archivo CSV desde la barra lateral. Tras la carga, el sistema generará un índice con FAISS y podrá escribir preguntas en el cuadro de texto para obtener respuestas basadas en la información del CSV.
 
+El índice se crea únicamente para la sesión actual y no se guarda en disco. Si reinicia la aplicación o carga un nuevo CSV, se generará un índice temporal nuevo.
+
 ## Créditos y enlaces útiles
 
 - [Modelo Phi-3 Mini 3.8B](https://huggingface.co/microsoft/Phi-3-mini-4k-instruct-GGUF)
