@@ -12,7 +12,7 @@ Instale las dependencias ejecutando:
 pip install -r requirements.txt
 ```
 
-Además, es necesario descargar el modelo `llama-2-70b-chat.Q4_K_M.gguf` y colocarlo en la carpeta `models` (consulte `models/llama-2-70b-chat.Q4_K_M.gguf.md` para más detalles).
+Además, es necesario descargar el modelo `llama-2-70b-chat.Q2_K.gguf` y colocarlo en la carpeta `models` (consulte `models/llama-2-70b-chat.Q2_K.gguf.md` para más detalles).
 
 ### Descarga desde la línea de comandos
 
@@ -21,8 +21,8 @@ Puede utilizar la utilidad `huggingface-cli` para descargar directamente el arch
 ```bash
 pip install huggingface-hub>=0.17.1
 huggingface-cli login
-huggingface-cli download TheBloke/Llama-2-70B-Chat-GGUF \
-    llama-2-70b-chat.Q4_K_M.gguf \
+    huggingface-cli download TheBloke/Llama-2-70B-Chat-GGUF \
+        llama-2-70b-chat.Q2_K.gguf \
     --local-dir ./models --local-dir-use-symlinks False
 ```
 
