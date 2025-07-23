@@ -49,7 +49,7 @@ def main():
     embeddings = HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
     docsearch = FAISS.from_documents(text_chunks, embeddings)
 
-    model_path = get_model_path("llama-2-70b-chat.Q4_K_M.gguf")
+    model_path = get_model_path("llama-2-70b-chat.Q2_K.gguf")
 
     if not os.path.isfile(model_path):
         st.error(
