@@ -43,4 +43,3 @@ El índice se crea únicamente para la sesión actual y no se guarda en disco. S
 ## Créditos y enlaces útiles
 
 - [Modelo Llama-2 70B Chat](https://huggingface.co/TheBloke/Llama-2-70B-Chat-GGUF)
-- Inspirado en el repositorio [ThisIs-Developer/Llama-2-GGML-CSV-Chatbot](https://github.com/ThisIs-Developer/Llama-2-GGML-CSV-Chatbot)
