@@ -10,7 +10,7 @@ sys.path.insert(0, str(ROOT))
 import pytest
 
 
-def test_main_missing_model(monkeypatch, tmp_path):
+def test_main_missing_api_key(monkeypatch, tmp_path):
     # Prepare dummy Streamlit
     calls = {"error": []}
     dummy_sidebar = types.SimpleNamespace(
@@ -60,8 +60,9 @@ def test_main_missing_model(monkeypatch, tmp_path):
         def from_documents(docs, emb):
             return DummyDocsearch(docs, emb)
 
-    class DummyLLM:
-        pass
+    class DummyChat:
+        def __init__(self, *a, **k):
+            pass
 
     class DummyChain:
         @staticmethod
@@ -77,8 +78,8 @@ def test_main_missing_model(monkeypatch, tmp_path):
     lc_comm.embeddings.HuggingFaceEmbeddings = DummyEmbeddings
     lc_comm.vectorstores = types.ModuleType("vectorstores")
     lc_comm.vectorstores.FAISS = DummyFAISS
-    lc_comm.llms = types.ModuleType("llms")
-    lc_comm.llms.CTransformers = DummyLLM
+    lc_openai = types.ModuleType("langchain_openai")
+    lc_openai.ChatOpenAI = DummyChat
     lc_comm.chains = types.ModuleType("chains")
     lc_comm.chains.ConversationalRetrievalChain = DummyChain
 
@@ -96,21 +97,18 @@ def test_main_missing_model(monkeypatch, tmp_path):
     monkeypatch.setitem(sys.modules, "langchain_community.document_loaders.csv_loader", lc_comm.document_loaders.csv_loader)
     monkeypatch.setitem(sys.modules, "langchain_community.embeddings", lc_comm.embeddings)
     monkeypatch.setitem(sys.modules, "langchain_community.vectorstores", lc_comm.vectorstores)
-    monkeypatch.setitem(sys.modules, "langchain_community.llms", lc_comm.llms)
+    monkeypatch.setitem(sys.modules, "langchain_openai", lc_openai)
     monkeypatch.setitem(sys.modules, "langchain_community.chains", lc_comm.chains)
     monkeypatch.setitem(sys.modules, "langchain", lc_main)
     monkeypatch.setitem(sys.modules, "langchain.chains", lc_main.chains)
     monkeypatch.setitem(sys.modules, "langchain_text_splitters", lc_splitters)
 
     monkeypatch.chdir(tmp_path)
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
 
     # Import model with our dummy modules
     model = importlib.import_module("model")
     importlib.reload(model)
-
-    # Replace get_model_path and isfile to trigger error branch
-    monkeypatch.setattr(model, "get_model_path", lambda name: str(tmp_path / name))
-    monkeypatch.setattr(model.os.path, "isfile", lambda path: False)
 
     model.main()
 
@@ -119,6 +117,6 @@ def test_main_missing_model(monkeypatch, tmp_path):
     # Loader invoked with dataset file
     assert DummyLoader.called == str(expected_dataset)
 
-    # Error displayed when model missing
-    assert calls["error"], "Expected error message when model file is missing"
-    assert "no se encontró" in calls["error"][0]
+    # Error displayed when API key missing
+    assert calls["error"], "Expected error message when API key is missing"
+    assert "OPENAI_API_KEY" in calls["error"][0]

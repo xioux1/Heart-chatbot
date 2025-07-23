@@ -1,32 +1,23 @@
-# Chatbot con Streamlit y Llama-2 70B Chat
+# Chatbot con Streamlit y ChatGPT
 
-Este proyecto es un ejemplo de chatbot que combina **Streamlit** con el modelo **Llama-2 70B Chat** para responder preguntas basadas en los datos de un archivo CSV. Para simplificar la demostración se incluye un conjunto de datos de ejemplo (``heart.csv``) que se carga automáticamente y no existe la opción de subir archivos personalizados.
+Este proyecto es un ejemplo de chatbot que combina **Streamlit** con **ChatGPT** (modelo ``gpt-3.5-turbo``) para responder preguntas basadas en los datos de un archivo CSV. Para simplificar la demostración se incluye un conjunto de datos de ejemplo (``heart.csv``) que se carga automáticamente y no existe la opción de subir archivos personalizados.
 
 ## Requisitos de instalación
 
-Se recomienda usar un entorno virtual de **Python 3.10 o 3.11** (las versiones más nuevas,
-como Python 3.13, no son compatibles actualmente con `ctransformers`).
+Se recomienda usar un entorno virtual de **Python 3.10 o 3.11** (las versiones más nuevas
+pueden no ser compatibles con todas las dependencias).
 Instale las dependencias ejecutando:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Además, es necesario descargar el modelo `llama-2-70b-chat.Q2_K.gguf` y colocarlo en la carpeta `models` (consulte `models/llama-2-70b-chat.Q2_K.gguf.md` para más detalles).
-
-### Descarga desde la línea de comandos
-
-Puede utilizar la utilidad `huggingface-cli` para descargar directamente el archivo GGUF:
+Configure la variable de entorno `OPENAI_API_KEY` con su clave de API de OpenAI:
 
 ```bash
-pip install huggingface-hub>=0.17.1
-huggingface-cli login
-    huggingface-cli download TheBloke/Llama-2-70B-Chat-GGUF \
-        llama-2-70b-chat.Q2_K.gguf \
-    --local-dir ./models --local-dir-use-symlinks False
+export OPENAI_API_KEY="sk-..."
 ```
 
-El modelo se guardará en la carpeta `models`.
 
 ## Ejecución
 
@@ -42,4 +33,4 @@ El índice se crea únicamente para la sesión actual y no se guarda en disco. S
 
 ## Créditos y enlaces útiles
 
-- [Modelo Llama-2 70B Chat](https://huggingface.co/TheBloke/Llama-2-70B-Chat-GGUF)
+- [API de OpenAI](https://platform.openai.com/docs/api-reference)
