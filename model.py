@@ -6,7 +6,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_community.llms import CTransformers
-from langchain_community.chains import ConversationalRetrievalChain
+from langchain.chains import ConversationalRetrievalChain
 
 from utils import add_vertical_space, ensure_directory, get_model_path
 

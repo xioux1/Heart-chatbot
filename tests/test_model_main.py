@@ -84,6 +84,11 @@ def test_main_missing_model(monkeypatch, tmp_path):
     lc_comm.chains = types.ModuleType("chains")
     lc_comm.chains.ConversationalRetrievalChain = DummyChain
 
+    # Build fake langchain package with generic chains
+    lc_main = types.ModuleType("langchain")
+    lc_main.chains = types.ModuleType("chains")
+    lc_main.chains.ConversationalRetrievalChain = DummyChain
+
     # Dummy text_splitters module
     lc_splitters = types.ModuleType("langchain_text_splitters")
     lc_splitters.RecursiveCharacterTextSplitter = DummySplitter
@@ -95,6 +100,8 @@ def test_main_missing_model(monkeypatch, tmp_path):
     monkeypatch.setitem(sys.modules, "langchain_community.vectorstores", lc_comm.vectorstores)
     monkeypatch.setitem(sys.modules, "langchain_community.llms", lc_comm.llms)
     monkeypatch.setitem(sys.modules, "langchain_community.chains", lc_comm.chains)
+    monkeypatch.setitem(sys.modules, "langchain", lc_main)
+    monkeypatch.setitem(sys.modules, "langchain.chains", lc_main.chains)
     monkeypatch.setitem(sys.modules, "langchain_text_splitters", lc_splitters)
 
     monkeypatch.chdir(tmp_path)
