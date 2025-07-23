@@ -75,8 +75,6 @@ def test_main_missing_model(monkeypatch, tmp_path):
     lc_comm.document_loaders = types.ModuleType("document_loaders")
     lc_comm.document_loaders.csv_loader = types.ModuleType("csv_loader")
     lc_comm.document_loaders.csv_loader.CSVLoader = DummyLoader
-    lc_comm.text_splitter = types.ModuleType("text_splitter")
-    lc_comm.text_splitter.RecursiveCharacterTextSplitter = DummySplitter
     lc_comm.embeddings = types.ModuleType("embeddings")
     lc_comm.embeddings.HuggingFaceEmbeddings = DummyEmbeddings
     lc_comm.vectorstores = types.ModuleType("vectorstores")
@@ -86,14 +84,18 @@ def test_main_missing_model(monkeypatch, tmp_path):
     lc_comm.chains = types.ModuleType("chains")
     lc_comm.chains.ConversationalRetrievalChain = DummyChain
 
+    # Dummy text_splitters module from langchain
+    lc_splitters = types.ModuleType("text_splitters")
+    lc_splitters.RecursiveCharacterTextSplitter = DummySplitter
+
     monkeypatch.setitem(sys.modules, "langchain_community", lc_comm)
     monkeypatch.setitem(sys.modules, "langchain_community.document_loaders", lc_comm.document_loaders)
     monkeypatch.setitem(sys.modules, "langchain_community.document_loaders.csv_loader", lc_comm.document_loaders.csv_loader)
-    monkeypatch.setitem(sys.modules, "langchain_community.text_splitter", lc_comm.text_splitter)
     monkeypatch.setitem(sys.modules, "langchain_community.embeddings", lc_comm.embeddings)
     monkeypatch.setitem(sys.modules, "langchain_community.vectorstores", lc_comm.vectorstores)
     monkeypatch.setitem(sys.modules, "langchain_community.llms", lc_comm.llms)
     monkeypatch.setitem(sys.modules, "langchain_community.chains", lc_comm.chains)
+    monkeypatch.setitem(sys.modules, "langchain.text_splitters", lc_splitters)
 
     monkeypatch.chdir(tmp_path)
 
