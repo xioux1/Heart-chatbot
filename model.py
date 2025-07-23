@@ -29,15 +29,20 @@ def main():
             unsafe_allow_html=True,
         )
 
-    st.title("Chatbot CSV ChatGPT ❤️")
+    st.title("¿Qué querés saber sobre los pacientes? ❤️")
+    st.sidebar.title("About")
+    st.sidebar.markdown(
+        "Este dataset contiene registros anónimos de pacientes con "
+        "enfermedades cardiovasculares. Está pensado para responder preguntas "
+        "sobre estos casos clínicos particulares."
+    )
 
     data_path = Path(__file__).resolve().parent / "data" / "heart.csv"
     if not data_path.exists():
         st.error(f"No se encontró el archivo de datos en {data_path}.")
         return
 
-    st.write(f"Usando dataset de ejemplo: {data_path.name}")
-    st.write("Procesando el archivo CSV...")
+    # El dataset se carga automáticamente para su uso en las consultas
 
     loader = CSVLoader(file_path=str(data_path), encoding="utf-8", csv_args={'delimiter': ','})
     data = loader.load()
@@ -45,7 +50,6 @@ def main():
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=20)
     text_chunks = text_splitter.split_documents(data)
 
-    st.write(f"Fragmentos de texto totales: {len(text_chunks)}")
 
     embeddings = HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
     docsearch = FAISS.from_documents(text_chunks, embeddings)
