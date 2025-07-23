@@ -12,7 +12,7 @@ Instale las dependencias ejecutando:
 pip install -r requirements.txt
 ```
 
-Además, es necesario descargar el modelo `phi-3-mini-4k-instruct-q4_0.gguf` y colocarlo en la carpeta `models` (consulte `models/phi-3-mini-4k-instruct-q4_0.gguf.md` para más detalles).
+Además, es necesario descargar el modelo `Phi-3-mini-4k-instruct-q4.gguf` y colocarlo en la carpeta `models` (consulte `models/Phi-3-mini-4k-instruct-q4.gguf.md` para más detalles).
 
 ## Ejecución
 

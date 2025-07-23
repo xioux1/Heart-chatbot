@@ -57,7 +57,7 @@ def main():
 
         model_path = os.path.join(os.path.dirname(__file__),
                                   "models",
-                                  "phi-3-mini-4k-instruct-q4_0.gguf")
+                                  "Phi-3-mini-4k-instruct-q4.gguf")
 
         if not os.path.isfile(model_path):
             st.error(
