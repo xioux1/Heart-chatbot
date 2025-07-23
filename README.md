@@ -14,6 +14,20 @@ pip install -r requirements.txt
 
 Además, es necesario descargar el modelo `Phi-3-mini-4k-instruct-q4.gguf` y colocarlo en la carpeta `models` (consulte `models/Phi-3-mini-4k-instruct-q4.gguf.md` para más detalles).
 
+### Descarga desde la línea de comandos
+
+Puede utilizar la utilidad `huggingface-cli` para descargar directamente el archivo GGUF:
+
+```bash
+pip install huggingface-hub>=0.17.1
+huggingface-cli login
+huggingface-cli download microsoft/Phi-3-mini-4k-instruct-gguf \
+    Phi-3-mini-4k-instruct-q4.gguf \
+    --local-dir ./models --local-dir-use-symlinks False
+```
+
+El modelo se guardará en la carpeta `models`.
+
 ## Ejecución
 
 Inicie la aplicación con:
