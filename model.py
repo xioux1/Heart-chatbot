@@ -6,14 +6,12 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
-from langchain_community.llms import CTransformers
 from langchain.chains import ConversationalRetrievalChain
-
-from utils import get_model_path
+from langchain_openai import ChatOpenAI
 
 def main():
     st.set_page_config(
-        page_title="Chatbot CSV Llama-2 70B",
+        page_title="Chatbot CSV ChatGPT",
         page_icon="❤️",
         layout="centered",
     )
@@ -31,7 +29,7 @@ def main():
             unsafe_allow_html=True,
         )
 
-    st.title("Chatbot CSV Llama-2 70B ❤️")
+    st.title("Chatbot CSV ChatGPT ❤️")
 
     data_path = Path(__file__).resolve().parent / "data" / "heart.csv"
     if not data_path.exists():
@@ -52,19 +50,11 @@ def main():
     embeddings = HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
     docsearch = FAISS.from_documents(text_chunks, embeddings)
 
-    model_path = get_model_path("llama-2-70b-chat.Q2_K.gguf")
-
-    if not os.path.isfile(model_path):
-        st.error(
-            f"El archivo del modelo no se encontró en {model_path}. Descárguelo como se indica en el README."
-        )
+    if not os.getenv("OPENAI_API_KEY"):
+        st.error("La variable de entorno OPENAI_API_KEY no está configurada.")
         return
 
-    llm = CTransformers(
-        model=model_path,
-        max_new_tokens=512,
-        temperature=0.1,
-    )
+    llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.1)
 
     qa = ConversationalRetrievalChain.from_llm(llm, retriever=docsearch.as_retriever())
 
