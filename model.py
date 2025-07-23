@@ -9,26 +9,29 @@ from langchain_community.vectorstores import FAISS
 from langchain_community.llms import CTransformers
 from langchain.chains import ConversationalRetrievalChain
 
-from utils import add_vertical_space, get_model_path
+from utils import get_model_path
 
 def main():
-    st.set_page_config(page_title="Chatbot CSV Llama-2 70B")
-    st.title("Chatbot CSV Llama-2 70B")
+    st.set_page_config(
+        page_title="Chatbot CSV Llama-2 70B",
+        page_icon="❤️",
+        layout="centered",
+    )
 
-    st.sidebar.title("Acerca de")
-    st.sidebar.markdown('''
-        El Chatbot CSV Llama-2 70B utiliza el modelo **Llama-2 70B Chat**.
+    if hasattr(st, "markdown"):
+        st.markdown(
+            """
+            <style>
+                body {
+                    background-color: white;
+                    font-family: Helvetica, Arial, sans-serif;
+                }
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
 
-        ### 🔄Bot en evolución, ¡mantente atento!
-
-        ## Enlaces útiles 🔗
-
-        - **Modelo:** [Llama-2 70B Chat](https://huggingface.co/TheBloke/Llama-2-70B-Chat-GGUF) 📚
-        - **GitHub:** [ThisIs-Developer/Llama-2-GGML-CSV-Chatbot](https://github.com/ThisIs-Developer/Llama-2-GGML-CSV-Chatbot) 💬
-    ''')
-
-    add_vertical_space(1)
-    st.sidebar.write('Hecho por [@ThisIs-Developer](https://huggingface.co/ThisIs-Developer)')
+    st.title("Chatbot CSV Llama-2 70B ❤️")
 
     data_path = Path(__file__).resolve().parent / "data" / "heart.csv"
     if not data_path.exists():
@@ -65,8 +68,8 @@ def main():
 
     qa = ConversationalRetrievalChain.from_llm(llm, retriever=docsearch.as_retriever())
 
-    st.write("Ingresa tu consulta:")
-    query = st.text_input("Consulta:")
+    st.write("Ingresa tu pregunta:")
+    query = st.text_input("Pregunta")
     if query:
         with st.spinner("Procesando tu pregunta..."):
             chat_history = []
