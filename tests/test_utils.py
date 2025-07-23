@@ -1,6 +1,7 @@
 import importlib
 import types
 import sys
+import os
 from pathlib import Path
 
 # Ensure repository root is on the path
@@ -31,3 +32,16 @@ def test_ensure_directory(tmp_path):
     # Should not raise if called again
     utils.ensure_directory(str(test_dir))
     assert test_dir.exists()
+
+
+def test_get_model_path(monkeypatch, tmp_path):
+    import utils
+    dummy_file = tmp_path / "utils.py"
+    dummy_file.write_text("")
+    monkeypatch.setattr(utils, "__file__", str(dummy_file))
+
+    path = utils.get_model_path("model.gguf")
+    expected = tmp_path / "models" / "model.gguf"
+
+    assert os.path.isabs(path)
+    assert Path(path) == expected

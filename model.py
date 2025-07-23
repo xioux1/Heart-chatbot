@@ -7,7 +7,7 @@ from langchain.vectorstores import FAISS
 from langchain.llms import CTransformers
 from langchain.chains import ConversationalRetrievalChain
 
-from utils import add_vertical_space, ensure_directory
+from utils import add_vertical_space, ensure_directory, get_model_path
 
 def main():
     st.set_page_config(page_title="Phi-3 Mini CSV Chatbot")
@@ -55,9 +55,7 @@ def main():
         docsearch = FAISS.from_documents(text_chunks, embeddings)
         docsearch.save_local(DB_FAISS_PATH)
 
-        model_path = os.path.join(os.path.dirname(__file__),
-                                  "models",
-                                  "Phi-3-mini-4k-instruct-q4.gguf")
+        model_path = get_model_path("Phi-3-mini-4k-instruct-q4.gguf")
 
         if not os.path.isfile(model_path):
             st.error(
