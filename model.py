@@ -63,10 +63,12 @@ def main():
             )
             return
 
-        llm = CTransformers(model=model_path,
-                            model_type="phi3",
-                            max_new_tokens=512,
-                            temperature=0.1)
+        # Auto-detect model architecture from the GGUF file
+        llm = CTransformers(
+            model=model_path,
+            max_new_tokens=512,
+            temperature=0.1,
+        )
 
         qa = ConversationalRetrievalChain.from_llm(llm, retriever=docsearch.as_retriever())
 
