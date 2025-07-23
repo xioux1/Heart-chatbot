@@ -38,6 +38,20 @@ streamlit run model.py
 
 Aparecerá una interfaz web donde podrá cargar un archivo CSV desde la barra lateral. Tras la carga, el sistema generará un índice con FAISS y podrá escribir preguntas en el cuadro de texto para obtener respuestas basadas en la información del CSV.
 
+## Pruebas
+
+Las pruebas unitarias se ejecutan con `pytest`. Primero instale las dependencias listadas en `requirements.txt`, que incluyen `pytest`:
+
+```bash
+pip install -r requirements.txt
+```
+
+Luego ejecute las pruebas con:
+
+```bash
+pytest
+```
+
 ## Créditos y enlaces útiles
 
 - [Modelo Phi-3 Mini 3.8B](https://huggingface.co/microsoft/Phi-3-mini-4k-instruct-GGUF)
