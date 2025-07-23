@@ -24,7 +24,8 @@ def test_main_missing_api_key(monkeypatch, tmp_path):
         sidebar=dummy_sidebar,
         write=lambda x: None,
         error=lambda x: calls["error"].append(x),
-        text_input=lambda prompt: "",
+        chat_input=lambda prompt: "",
+        chat_message=lambda role: types.SimpleNamespace(markdown=lambda content: None),
         spinner=lambda text: types.SimpleNamespace(__enter__=lambda self: None, __exit__=lambda self, exc_type, exc, tb: None),
     )
     monkeypatch.setitem(sys.modules, "streamlit", dummy_st)

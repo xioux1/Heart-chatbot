@@ -62,13 +62,25 @@ def main():
 
     qa = ConversationalRetrievalChain.from_llm(llm, retriever=docsearch.as_retriever())
 
-    st.write("Ingresa tu pregunta:")
-    query = st.text_input("Pregunta")
-    if query:
+    if "chat_history" not in st.session_state:
+        st.session_state["chat_history"] = []
+
+    for i, (user_msg, bot_msg) in enumerate(st.session_state["chat_history"]):
+        with st.chat_message("user"):
+            st.markdown(user_msg)
+        with st.chat_message("assistant"):
+            st.markdown(bot_msg)
+
+    user_input = st.chat_input("Ingresa tu pregunta")
+    if user_input:
+        with st.chat_message("user"):
+            st.markdown(user_input)
         with st.spinner("Procesando tu pregunta..."):
-            chat_history = []
-            result = qa({"question": query, "chat_history": chat_history})
-            st.write("Respuesta:", result['answer'])
+            result = qa({"question": user_input, "chat_history": st.session_state["chat_history"]})
+        bot_answer = result["answer"]
+        with st.chat_message("assistant"):
+            st.markdown(bot_answer)
+        st.session_state["chat_history"].append((user_input, bot_answer))
 
 if __name__ == "__main__":
     main()

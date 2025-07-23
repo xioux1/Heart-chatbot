@@ -27,7 +27,7 @@ Inicie la aplicación con:
 streamlit run model.py
 ```
 
-Aparecerá una interfaz web que utiliza automáticamente el archivo ``heart.csv`` incluido en el repositorio. El sistema genera un índice con FAISS y podrá escribir preguntas en el cuadro de texto para obtener respuestas basadas en la información del CSV.
+Aparecerá una interfaz tipo chat que utiliza automáticamente el archivo ``heart.csv`` incluido en el repositorio. El sistema genera un índice con FAISS y podrás conversar manteniendo el contexto de las preguntas previas para obtener respuestas basadas en la información del CSV.
 
 El índice se crea únicamente para la sesión actual y no se guarda en disco. Si reinicia la aplicación, se generará nuevamente a partir del dataset predefinido.
 
