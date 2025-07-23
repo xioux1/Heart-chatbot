@@ -70,30 +70,30 @@ def test_main_missing_model(monkeypatch, tmp_path):
         def from_llm(llm, retriever=None):
             return None
 
-    # Build fake langchain package structure
-    langchain = types.ModuleType("langchain")
-    langchain.document_loaders = types.ModuleType("document_loaders")
-    langchain.document_loaders.csv_loader = types.ModuleType("csv_loader")
-    langchain.document_loaders.csv_loader.CSVLoader = DummyLoader
-    langchain.text_splitter = types.ModuleType("text_splitter")
-    langchain.text_splitter.RecursiveCharacterTextSplitter = DummySplitter
-    langchain.embeddings = types.ModuleType("embeddings")
-    langchain.embeddings.HuggingFaceEmbeddings = DummyEmbeddings
-    langchain.vectorstores = types.ModuleType("vectorstores")
-    langchain.vectorstores.FAISS = DummyFAISS
-    langchain.llms = types.ModuleType("llms")
-    langchain.llms.CTransformers = DummyLLM
-    langchain.chains = types.ModuleType("chains")
-    langchain.chains.ConversationalRetrievalChain = DummyChain
+    # Build fake langchain_community package structure
+    lc_comm = types.ModuleType("langchain_community")
+    lc_comm.document_loaders = types.ModuleType("document_loaders")
+    lc_comm.document_loaders.csv_loader = types.ModuleType("csv_loader")
+    lc_comm.document_loaders.csv_loader.CSVLoader = DummyLoader
+    lc_comm.text_splitter = types.ModuleType("text_splitter")
+    lc_comm.text_splitter.RecursiveCharacterTextSplitter = DummySplitter
+    lc_comm.embeddings = types.ModuleType("embeddings")
+    lc_comm.embeddings.HuggingFaceEmbeddings = DummyEmbeddings
+    lc_comm.vectorstores = types.ModuleType("vectorstores")
+    lc_comm.vectorstores.FAISS = DummyFAISS
+    lc_comm.llms = types.ModuleType("llms")
+    lc_comm.llms.CTransformers = DummyLLM
+    lc_comm.chains = types.ModuleType("chains")
+    lc_comm.chains.ConversationalRetrievalChain = DummyChain
 
-    monkeypatch.setitem(sys.modules, "langchain", langchain)
-    monkeypatch.setitem(sys.modules, "langchain.document_loaders", langchain.document_loaders)
-    monkeypatch.setitem(sys.modules, "langchain.document_loaders.csv_loader", langchain.document_loaders.csv_loader)
-    monkeypatch.setitem(sys.modules, "langchain.text_splitter", langchain.text_splitter)
-    monkeypatch.setitem(sys.modules, "langchain.embeddings", langchain.embeddings)
-    monkeypatch.setitem(sys.modules, "langchain.vectorstores", langchain.vectorstores)
-    monkeypatch.setitem(sys.modules, "langchain.llms", langchain.llms)
-    monkeypatch.setitem(sys.modules, "langchain.chains", langchain.chains)
+    monkeypatch.setitem(sys.modules, "langchain_community", lc_comm)
+    monkeypatch.setitem(sys.modules, "langchain_community.document_loaders", lc_comm.document_loaders)
+    monkeypatch.setitem(sys.modules, "langchain_community.document_loaders.csv_loader", lc_comm.document_loaders.csv_loader)
+    monkeypatch.setitem(sys.modules, "langchain_community.text_splitter", lc_comm.text_splitter)
+    monkeypatch.setitem(sys.modules, "langchain_community.embeddings", lc_comm.embeddings)
+    monkeypatch.setitem(sys.modules, "langchain_community.vectorstores", lc_comm.vectorstores)
+    monkeypatch.setitem(sys.modules, "langchain_community.llms", lc_comm.llms)
+    monkeypatch.setitem(sys.modules, "langchain_community.chains", lc_comm.chains)
 
     monkeypatch.chdir(tmp_path)
 
