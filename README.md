@@ -34,3 +34,7 @@ El índice se crea únicamente para la sesión actual y no se guarda en disco. S
 ## Créditos y enlaces útiles
 
 - [API de OpenAI](https://platform.openai.com/docs/api-reference)
+
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/94ea0b5f-bab1-4fee-871c-c0eb7b291c8b" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/d6a569f3-dc92-441f-bcd1-2a5be92752d4" />
+
