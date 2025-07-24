@@ -31,6 +31,20 @@ Aparecerá una interfaz tipo chat que utiliza automáticamente el archivo ``hear
 
 El índice se crea únicamente para la sesión actual y no se guarda en disco. Si reinicia la aplicación, se generará nuevamente a partir del dataset predefinido.
 
+## Pruebas
+
+Las pruebas unitarias se ejecutan con `pytest`. Primero instale las dependencias listadas en `requirements.txt`, que incluyen `pytest`:
+
+```bash
+pip install -r requirements.txt
+```
+
+Luego ejecute las pruebas con:
+
+```bash
+pytest
+```
+
 ## Créditos y enlaces útiles
 
 - [API de OpenAI](https://platform.openai.com/docs/api-reference)
